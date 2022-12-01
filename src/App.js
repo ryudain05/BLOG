@@ -12,6 +12,7 @@ function App() {
   ]);
 
   let [like, likechange] = useState(0);
+  let [modal, setModal] = useState(false);
 
   return (
     <div className="App">
@@ -58,13 +59,29 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{title[2]}</h4>
+        <h4
+          onClick={() => {
+            modal == true ? setModal(false) : setModal(true);
+          }}
+        >
+          {title[2]}
+        </h4>
         <p>2월 17일 발행</p>
       </div>
-      <Modal />
+
+      {/* 동적 UI 만드는 Step
+       * 1. html css로 미리 디자인 완성
+       * 2. UI 현재 상태를 state로 저장
+       * 3. state에 따라 UI가 어떻게 보일지 작성
+       */}
+      {modal == true ? <Modal /> : null}
     </div>
   );
 }
+
+// const Modal = () => {
+//   return <div> </div>;
+// };
 
 /* 컴포넌트
  * 1. 반복적인 html 축약할 때
