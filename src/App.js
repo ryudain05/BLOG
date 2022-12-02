@@ -11,7 +11,7 @@ function App() {
     "파이썬독학",
   ]);
 
-  let [like, likechange] = useState(0);
+  let [like, likechange] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
 
   return (
@@ -40,40 +40,34 @@ function App() {
       >
         글 수정
       </button>
-      <div className="list">
-        <h4>
-          {title[0]}{" "}
-          <span
-            onClick={() => {
-              likechange(like + 1);
-            }}
-          >
-            👍🏻
-          </span>{" "}
-          {like}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
+
       {/* title 개수에 따른 반복문 */}
-      {title.map(function () {
+      {title.map(function (a, i) {
         return (
-          <div className="list">
-            <h4>{title[1]}</h4>
+          <div className="list" key={i}>
+            <h4
+              onClick={() => {
+                modal == true ? setModal(false) : setModal(true);
+              }}
+            >
+              {title[i]}
+            </h4>
             <p>2월 17일 발행</p>
+            <h4>
+              <span
+                onClick={() => {
+                  let copy = [...like];
+                  copy[i] = copy[i] + 1;
+                  likechange(copy);
+                }}
+              >
+                👍🏻
+              </span>{" "}
+              {like[i]}
+            </h4>
           </div>
         );
       })}
-
-      <div className="list">
-        <h4
-          onClick={() => {
-            modal == true ? setModal(false) : setModal(true);
-          }}
-        >
-          {title[2]}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
 
       {/* 동적 UI 만드는 Step
        * 1. html css로 미리 디자인 완성
