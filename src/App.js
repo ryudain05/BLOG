@@ -54,10 +54,16 @@ function App() {
         </h4>
         <p>2월 17일 발행</p>
       </div>
-      <div className="list">
-        <h4>{title[1]}</h4>
-        <p>2월 17일 발행</p>
-      </div>
+      {/* title 개수에 따른 반복문 */}
+      {title.map(function () {
+        return (
+          <div className="list">
+            <h4>{title[1]}</h4>
+            <p>2월 17일 발행</p>
+          </div>
+        );
+      })}
+
       <div className="list">
         <h4
           onClick={() => {
