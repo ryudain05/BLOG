@@ -74,7 +74,16 @@ function App() {
        * 2. UI 현재 상태를 state로 저장
        * 3. state에 따라 UI가 어떻게 보일지 작성
        */}
-      {modal == true ? <Modal /> : null}
+      {modal == true ? (
+        <Modal
+          onClick={() => {
+            let copy = [...title];
+            copy[0] = "여자코트 추천";
+            choice(copy);
+          }}
+          title={title}
+        />
+      ) : null}
     </div>
   );
 }
@@ -88,12 +97,14 @@ function App() {
  * 2. 큰 페이지들
  * 3. 자주 변경되는 것들
  */
-function Modal() {
+function Modal(props) {
   return (
-    <div className="modal">
-      <h4>제목</h4>
+    <div className="modal" style={{ background: props.color }}>
+      {/* props 사용 자식에서 부모는 불가능 옆집 불가능*/}
+      <h4>{props.title[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button>글 수정</button>
     </div>
   );
 }
