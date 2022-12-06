@@ -13,6 +13,7 @@ function App() {
 
   let [like, likechange] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [title_cnt, setTitle] = useState(0);
 
   return (
     <div className="App">
@@ -69,20 +70,35 @@ function App() {
         );
       })}
 
+      <button
+        onClick={() => {
+          setTitle(0);
+        }}
+      >
+        글제목0
+      </button>
+      <button
+        onClick={() => {
+          setTitle(1);
+        }}
+      >
+        글제목1
+      </button>
+      <button
+        onClick={() => {
+          setTitle(2);
+        }}
+      >
+        글제목2
+      </button>
+
       {/* 동적 UI 만드는 Step
        * 1. html css로 미리 디자인 완성
        * 2. UI 현재 상태를 state로 저장
        * 3. state에 따라 UI가 어떻게 보일지 작성
        */}
       {modal == true ? (
-        <Modal
-          onClick={() => {
-            let copy = [...title];
-            copy[0] = "여자코트 추천";
-            choice(copy);
-          }}
-          title={title}
-        />
+        <Modal color={"pink"} title_cnt={title_cnt} title={title} />
       ) : null}
     </div>
   );
@@ -101,10 +117,16 @@ function Modal(props) {
   return (
     <div className="modal" style={{ background: props.color }}>
       {/* props 사용 자식에서 부모는 불가능 옆집 불가능*/}
-      <h4>{props.title[0]}</h4>
+      <h4>{props.title[props.title_cnt]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
-      <button>글 수정</button>
+      {/* <button
+        onClick={() => {
+          props.choice(["여자코트 추천", "강남 우동 맛집", "파이썬 독학"]);
+        }}
+      >
+        글 수정
+      </button> */}
     </div>
   );
 }
